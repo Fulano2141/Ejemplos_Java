@@ -1,0 +1,5 @@
+cama;bed
+gato;cat
+dog;perro
+pig;cerdo
+sdfsdf;asfasf

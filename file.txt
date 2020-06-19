@@ -1,0 +1,58 @@
+import java.io.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+public class FileText1
+{
+ public static void main (String[] args) throws IOException
+ {
+  String n1="prueba.txt";
+  for(;;)
+  {
+   String []menu = {"Almacenar salarios","Reporte de salarios","Salir"};
+   String valor= (String) JOptionPane.showInputDialog(null, "Seleccione la opcion:","SAlARIOS", JOptionPane.DEFAULT_OPTION,null,menu,menu);
+   switch (valor)
+   {
+     case "Almacenar datos": crear();break;
+     case "Ver datos": leer();break;
+     case "Salir": System.exit(0);
+   }
+  }
+ }
+ public static void crear() throws IOException
+ {
+  try 
+  {
+  FileWriter fichero=new FileWriter("prueba.txt",true);
+  PrintWriter pw=new PrintWriter(fichero);
+  int n=Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos salarios?:"));
+  for(int i=0;i<n;i++)
+  {
+   double sal=Double.parseDouble(JOptionPane.showInputDialog(null,"Ingrese un salario"));
+   pw.println(sal);
+  }
+  fichero.close();
+  }
+  catch(Exception e) 
+  {
+   JOptionPane.showMessageDialog(null,"Hubo un error al crear el archivo de tipo: "+e);
+  }
+ }
+ public static void leer() throws IOException
+ {
+  try {
+  BufferedReader in=new BufferedReader(new FileReader("prueba.txt"));
+  String nom="",aux="";
+  for(;(nom=in.readLine())!=null;)
+  {
+   aux+=nom+"\n";
+  }
+  JTextArea area=new JTextArea();
+  area.setText(aux);
+  JOptionPane.showMessageDialog(null, area,"REPORTE",JOptionPane.PLAIN_MESSAGE);
+  in.close();}
+  catch(Exception e) 
+  {
+   JOptionPane.showMessageDialog(null,"No se encontro el archivo: "+e);
+  }
+ }
+ }

@@ -1,0 +1,5 @@
+cat;gato
+dog;perro
+fulano;felano
+small;pequeño
+big;grande

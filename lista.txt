@@ -1,0 +1,128 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+public class lista{
+	public static class nodo{
+		int dato;
+		nodo sgte;
+	}
+	public static void main(String arg[])throws IOException{  
+		nodo cab=null;
+		int n1=0,n=0;
+		int opciones;
+		do{
+			menu();
+			opciones=leer("");
+			switch (opciones){
+			case 1:
+				cab=agregar_nodo(cab);
+				break;
+			case 2:
+				listado("Datos de la lista\n",cab);
+				break;  
+			case 3:
+				System.out.println(" la sumatoria es "+sumatoria(cab));
+				break;   
+//			case 8:
+//				mostrar_a_b(cab,n1,n);
+//				break;
+			case 9:
+				ordenar(cab);
+				break;
+			}
+		}while(opciones!=15);         
+	}	
+//	public static void mostrar_a_b(nodo c, int x, int y) {
+//		nodo uno=dir_x(c,x);
+//		nodo dos=dir_x(c,y);
+//		while(uno!=dos) {
+//			System.out.println(" direccion= "+uno+" dato= "+uno.dato);
+//			uno=uno.sgte;
+//		}
+//		
+//	}
+	public static int sumatoria(nodo c){
+		int s=0;
+		while(c!=null){
+			s=s+c.dato;
+			c=c.sgte;
+		}
+		return(s);
+	}
+	public static void listado(String t, nodo c){
+		System.out.println(t);
+		while(c!=null){
+			System.out.println("DATO = "+c.dato+" Direccion = "+c);
+			c=c.sgte;
+		}
+	}
+	public static nodo agregar_nodo(nodo c)throws IOException{	 	
+		nodo aux=new nodo();
+		aux.dato=leer("dato?");
+		aux.sgte=c;
+		c=aux;
+		return(c);
+	}
+	public static void menu(){
+		System.out.println("listas enlazadas");
+		System.out.println("1. agregar nodos");
+		System.out.println("2. listado");
+		System.out.println("3. sumatoria");
+		System.out.println("9. ordenar");
+		System.out.println("15. salir");                  
+	}
+	public static int leer(String t)throws IOException{
+		BufferedReader y=new BufferedReader (new InputStreamReader(System.in));
+		System.out.println(t);
+		int p=Integer.parseInt(y.readLine());
+		return(p);   
+	}
+	public static int contar(nodo cab) {
+		int cc=0;
+		while(cab!=null) {
+			cc++;
+			cab=cab.sgte;
+		}
+		return cc;
+	}
+//	public static nodo dir_x (nodo c, int p) {
+//		int i=1;
+//		
+//	}
+
+	public static void ordenar(nodo c) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(c!=null) {
+			list.add(c.dato);
+			c=c.sgte;
+		}
+		Collections.sort(list);
+		System.out.println(list);
+	}
+	public static nodo ordenar_1(nodo c) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(c!=null) {
+			list.add(c.dato);
+			c=c.sgte;
+		}
+		Collections.sort(list);
+		nodo aux=new nodo();
+		aux=null;
+		for(int i=0;i<list.size();i++) {
+			aux.dato=list.get(i);
+			aux=agregar_nodo()
+		}
+		return aux;
+	}
+	public static nodo agregar_nodo(nodo c, int num)throws IOException{	 	
+		nodo aux=new nodo();
+		aux.dato=num;
+		aux.sgte=c;
+		c=aux;
+		return(c);
+	}
+	
+	
+	
+	
+}

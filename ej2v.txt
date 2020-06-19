@@ -1,0 +1,185 @@
+import java.io.*;
+
+public class Voluntario1 {
+    public static class circular
+    {
+     String nombre;
+     circular sgte;     
+    }
+    public static class nodo
+    {
+     String nombre;
+     nodo sgte;     
+    }
+ public static void main(String[] args) throws IOException
+ {
+  circular cabc=null;
+  int op,n,x;
+  do {
+   menu();
+   op=leer("?");
+   switch(op)
+   {
+   case 1:
+    cabc=add_nodos_circular(cabc);
+    break;
+   case 2:
+    listado("\nJugadores ",cabc);
+    break;
+   case 3:
+	   if(cabc==null || cabc.sgte==cabc) {
+		   System.out.println("No hay suficientes jugadores");
+	   }else {
+		   seleccion(cabc);
+	   }
+	   break;
+   }
+  }while(op!=10);
+ }
+ public static void seleccion(circular a)
+ {
+	 nodo b=null,c=null,aux=null;
+	 int i=0,d;
+	 while(a.sgte!=a) {
+do {
+		d=dado();
+	 }while(d>contar_cir(a));
+System.out.println("dado ="+d);
+		 if(i%2==1) {
+d=contar_cir(a)-d;		 
+}
+		a=saltar(a,d);
+		aux=new nodo();
+		aux.nombre=a.sgte.nombre;
+		 if(i%2==1) {	
+			 b=add_nodo(b,aux);
+		 }else {
+			 c=add_nodo(c,aux);
+		 }
+		a.sgte=a.sgte.sgte;
+		a=a.sgte;
+		 i++;
+	 }
+	 aux=new nodo();
+		aux.nombre=a.nombre;
+	 if(i%2==1) {	
+		 b=add_nodo(b,aux);
+	 }else {
+		 c=add_nodo(c,aux);
+	 }
+	 a=null;
+	 listado2("Equipo 1: ",c);
+	 listado2("Equipo 2:",b);
+	 
+ }
+ public static int dado()
+ {
+	 int numero = (int) (Math.random() * 6) + 1;
+	 return(numero);
+ }
+ public static circular saltar(circular ca, int s)
+ {
+	 for(int i=1;i<s;i++)
+		 ca=ca.sgte;
+     return(ca);
+ }
+ public static int contar_cir(circular cab)
+ {
+	 int c=0;
+	 circular cab2=cab.sgte;
+	 do {
+		 cab2=cab2.sgte;
+		 c++;
+	 }while(cab2!=cab);
+	 return(c);
+ }
+ public static circular borrar (circular a, int x)
+ {
+  circular aux = a;
+  for (int i=1; i<x-1; i++)
+  {
+   a=a.sgte;
+  }
+  a.sgte=a.sgte.sgte;
+  return aux;
+ }
+ 
+ public static void listado(String h,circular c)
+ {
+  circular z=c;
+  if(c!=null)
+  {
+   do
+   {
+    System.out.print(z.nombre+"\t");
+    z=z.sgte;
+   }
+   while(z!=c);
+  } 
+ }
+ public static void listado2(String h,nodo c)
+ {
+	 System.out.print(h);
+while(c!=null) {
+    System.out.print(c.nombre+"\t");
+    c=c.sgte;
+  } 
+ }
+ public static void menu()
+ {
+  System.out.println("\n***Ejercicio 2 ****");
+  System.out.println("1.- Lectura");
+  System.out.println("2.- Listado");
+  System.out.println("3.- Procedimiento de selección");
+  System.out.println("10.- Salir");
+ }
+   
+ public static circular add_nodos_circular(circular x)throws IOException
+ {
+  circular aux=new circular();
+  circular z;
+  aux.nombre=leers("Nombre?");
+  aux.sgte=aux;
+  if (x==null)
+   x=aux;
+  else
+  {
+   z=x;
+   while(z.sgte!=x)
+    z=z.sgte;
+   z.sgte=aux;
+   aux.sgte=x;
+  }
+  return(x);
+ }
+ public static nodo add_nodo(nodo x,nodo aux)
+ {
+	 nodo c=x;
+  if (x==null) {
+   x=aux;
+  }
+  else
+  {
+   while(c.sgte!=null) {
+    c=c.sgte;
+   }
+   c.sgte=aux;
+  }
+ 
+  return(x);
+ }
+  public static String leers(String z)throws IOException
+     {   
+      BufferedReader s=new BufferedReader(new InputStreamReader(System.in));    
+      System.out.println(z);
+      String r=s.readLine();
+      return(r);
+     }
+    public static int leer(String z)throws IOException
+    {   
+     BufferedReader s=new BufferedReader(new InputStreamReader(System.in));    
+     System.out.println(z);
+     int r=Integer.parseInt(s.readLine());
+     return(r);
+    }
+}

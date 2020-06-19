@@ -1,0 +1,14 @@
+	public void actionPerformed (ActionEvent event) {
+		if(event.getSource()==bt1){
+			double x=Double.parseDouble(tf1.getText());
+			String cen=cambio1(x);
+			tf2.setText("");
+			tf3.setText(cen+" Farenheit");
+		}
+		if(event.getSource()==bt2){
+			double x=Double.parseDouble(tf2.getText());
+			String cen=cambio2(x);
+			tf1.setText("");
+			tf3.setText(cen+" Centrigrados");
+		}
+	}
