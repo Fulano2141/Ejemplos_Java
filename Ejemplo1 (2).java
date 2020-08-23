@@ -18,7 +18,8 @@ public class Ejemplo1 {
 		BufferedReader in=new BufferedReader(new FileReader("nombres.txt"));
 	    String aux="";
 	    while (in.ready()) {
-	    	aux=in.readLine();
+			aux=in.readLine();
+			
 	    	System.out.println(aux);
 	    }
 	    in.close();
